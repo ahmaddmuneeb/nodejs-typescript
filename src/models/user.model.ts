@@ -1,16 +1,15 @@
 import mongoose from 'mongoose';
-
+import { IUser } from '../types/userSchema';
 // This is user schema
-const UserSchema = new mongoose.Schema({
-  username: { type: String, required: true },
-  email: { type: String, required: true },
-  authentication: {
+const UserSchema = new mongoose.Schema(
+  {
+    username: { type: String, required: true },
+    email: { type: String, required: true },
     password: { type: String, required: true, select: false },
-    salt: { type: String, select: false },
-    sessionToken: { type: String, select: false },
+    roleType: { type: String, default: 'user' },
+    isConfirmed: { type: Boolean, default: false },
   },
-});
+  { timestamps: true }
+);
 // making user model from user schema
-const UserModel = mongoose.model('User', UserSchema);
-// export user model
-module.exports = UserModel;
+export const UserModel = mongoose.model<IUser>('User', UserSchema);
