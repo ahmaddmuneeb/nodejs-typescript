@@ -9,7 +9,7 @@ import './config/db';
 import router from './routes';
 
 const port = process.env.PORT || 8080;
-const app = express();
+export const app = express();
 
 app.use(
   cors({
